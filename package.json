@@ -1,0 +1,34 @@
+{
+  "name": "renter-e2e",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:head": "playwright test --headed",
+    "test:member": "playwright test --project=member",
+    "test:guest": "playwright test --project=guest",
+    "test:both": "playwright test --project=member --project=guest",
+    "test:setup": "playwright test --project=setup",
+    "test:report": "node scripts/run-tests-with-report.js",
+    "test:report:member": "node scripts/run-tests-with-report.js --project=member",
+    "test:report:guest": "node scripts/run-tests-with-report.js --project=guest",
+    "test:report:both": "node scripts/run-tests-with-report.js --project=member --project=guest",
+    "show-report": "playwright show-report",
+    "show-latest": "playwright show-report test-reports/latest",
+    "clean-reports": "node scripts/clean-reports.js",
+    "cogen": "playwright codegen"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.54.0",
+    "@types/node": "^24.0.13",
+    "node-fetch": "^3.3.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0"
+  }
+}
