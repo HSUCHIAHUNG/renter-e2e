@@ -15,8 +15,9 @@
     "test:report:guest": "node scripts/run-tests-with-report.js --project=guest",
     "test:report:both": "node scripts/run-tests-with-report.js --project=member --project=guest",
     "show-report": "playwright show-report",
-    "show-latest": "playwright show-report test-reports/latest",
+    "show-latest": "playwright show-report reports/latest",
     "clean-reports": "node scripts/clean-reports.js",
+    "clean-artifacts": "node scripts/clean-artifacts.js",
     "cogen": "playwright codegen"
   },
   "keywords": [],
