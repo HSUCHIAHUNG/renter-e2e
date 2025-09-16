@@ -17,7 +17,7 @@
     "show-report": "playwright show-report",
     "show-latest": "playwright show-report reports/latest",
     "clean-reports": "node scripts/clean-reports.js",
-    "clean-artifacts": "node scripts/clean-artifacts.js",
+    "clean-assets": "node scripts/clean-assets.js",
     "cogen": "playwright codegen"
   },
   "keywords": [],

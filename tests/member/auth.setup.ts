@@ -76,11 +76,11 @@ export async function login(page: any, tokens: AuthTokens) {
     ([key, value, token, expiry]) => {
       // 清除任何現有的登出狀態
       window.localStorage.removeItem("auth0:event");
-      
+
       window.localStorage.setItem(key, value);
       window.localStorage.setItem("auth_token", token);
       window.localStorage.setItem("auth_token_expiry", expiry);
-      
+
       // 設定登入事件
       window.localStorage.setItem("auth0:event", "login");
     },
@@ -114,10 +114,10 @@ export async function programmaticLogin(page: any) {
 
 setup("authenticate", async ({ page }) => {
   console.log("開始 Auth0 認證設定...");
-  
+
   await page.goto(process.env.BASE_URL || "https://www-dev.loopmaas.com");
   console.log("已導航到頁面:", page.url());
-  
+
   await programmaticLogin(page);
   console.log("程式化登入完成");
 
@@ -126,7 +126,7 @@ setup("authenticate", async ({ page }) => {
   console.log("頁面重新載入完成");
 
   // 等待頁面載入完成
-  await page.waitForLoadState('networkidle');
+  await page.waitForLoadState("networkidle");
   console.log("網路閒置狀態達成");
 
   // 等待 React 應用程式初始化和處理認證狀態
@@ -134,32 +134,36 @@ setup("authenticate", async ({ page }) => {
   console.log("等待應用程式初始化完成");
 
   // 截圖用於除錯
-  await page.screenshot({ path: 'artifacts/debug-after-login.png' });
-  
+  await page.screenshot({ path: "assets/debug-after-login.png" });
+
   // 檢查頁面標題
   const title = await page.title();
   console.log("頁面標題:", title);
 
   // 嘗試找到登出按鈕，增加等待時間
   try {
-    await expect(page.getByRole("button", { name: "登出" })).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole("button", { name: "登出" })).toBeVisible({
+      timeout: 15000,
+    });
     console.log("找到登出按鈕，認證成功");
   } catch (error) {
     console.log("找不到登出按鈕，檢查頁面內容...");
-    
+
     // 檢查是否有其他登入相關的元素
-    const bodyText = await page.textContent('body');
+    const bodyText = await page.textContent("body");
     console.log("頁面部分內容:", bodyText?.substring(0, 500));
-    
+
     // 檢查 localStorage
-    const localStorage = await page.evaluate(() => 
-      JSON.stringify(Object.keys(window.localStorage).reduce((acc, key) => {
-        acc[key] = window.localStorage.getItem(key)?.substring(0, 100) || '';
-        return acc;
-      }, {} as Record<string, string>))
+    const localStorage = await page.evaluate(() =>
+      JSON.stringify(
+        Object.keys(window.localStorage).reduce((acc, key) => {
+          acc[key] = window.localStorage.getItem(key)?.substring(0, 100) || "";
+          return acc;
+        }, {} as Record<string, string>)
+      )
     );
     console.log("LocalStorage keys:", localStorage);
-    
+
     throw error;
   }
 

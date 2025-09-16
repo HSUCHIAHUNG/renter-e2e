@@ -42,7 +42,7 @@ export default defineConfig({
     {
       name: "setup",
       testMatch: /member\/auth.setup.ts/,
-      outputDir: `artifacts/setup/${timestamp}`,
+      outputDir: `assets/setup/${timestamp}`,
     },
     // 專案 2: 已登入專案 - 用於需要登入的測試
     {
@@ -65,7 +65,7 @@ export default defineConfig({
       dependencies: ["setup"],
       // 您可以指定這個專案要執行的測試檔案目錄
       testMatch: /member\/.*\.spec\.ts/,
-      outputDir: `artifacts/member-tests/${timestamp}`,
+      outputDir: `assets/member-tests/${timestamp}`,
     },
 
     // 專案 3: 公開專案 - 用於不需要登入的測試
@@ -85,7 +85,7 @@ export default defineConfig({
       },
       // 您可以指定這個專案要執行的測試檔案目錄
       testMatch: /guest\/.*\.spec\.ts/,
-      outputDir: `artifacts/guest-tests/${timestamp}`,
+      outputDir: `assets/guest-tests/${timestamp}`,
     },
 
     /* 您也可以為 Firefox, WebKit 等瀏覽器設定類似的專案 */
