@@ -17,7 +17,7 @@ test-reports/
 playwright-report/
 
 # Authentication files
-playwright/.auth/
+auth/
 
 # Screenshots and videos
 screenshots/

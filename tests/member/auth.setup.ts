@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { test as setup, expect, request } from "@playwright/test";
 
-const authFile = "playwright/.auth/user.json";
+const authFile = "auth/user.json";
 
 // 定義權杖的介面，方便型別檢查
 interface AuthTokens {

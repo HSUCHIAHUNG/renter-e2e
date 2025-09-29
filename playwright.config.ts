@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // 定義儲存驗證狀態的檔案路徑
-const authFile = "playwright/.auth/user.json";
+const authFile = "auth/user.json";
 
 // 為測試結果創建時間戳記目錄
 const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, "-");
@@ -28,6 +28,7 @@ export default defineConfig({
   // 在本地開發時，Playwright 會根據 CPU 核心數自動決定並行數量，以求最快速度。
   workers: process.env.CI ? 1 : undefined,
   reporter: [
+    ["list"],
     [
       "html",
       {
