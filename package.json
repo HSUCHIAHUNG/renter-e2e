@@ -12,15 +12,9 @@
     "test:guest": "playwright test --project=guest",
     "test:both": "playwright test --project=member --project=guest",
     "test:setup": "playwright test --project=setup",
-    "test:report": "node scripts/run-tests-with-report.js",
-    "test:report:member": "node scripts/run-tests-with-report.js --project=member",
-    "test:report:guest": "node scripts/run-tests-with-report.js --project=guest",
-    "test:report:both": "node scripts/run-tests-with-report.js --project=member --project=guest",
-    "show-report": "playwright show-report reports/latest",
-    "show-latest": "playwright show-report reports/latest",
-    "clean-reports": "node scripts/clean-reports.js",
-    "clean-assets": "node scripts/clean-assets.js",
-    "cogen": "playwright codegen"
+    "cogen": "playwright codegen",
+    "cleanup:html": "node scripts/cleanup-html-reports.js",
+    "build:docs": "node scripts/build-docs.js"
   },
   "keywords": [],
   "author": "",

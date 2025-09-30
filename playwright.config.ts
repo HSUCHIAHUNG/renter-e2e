@@ -10,8 +10,17 @@ const __dirname = path.dirname(__filename);
 // 定義儲存驗證狀態的檔案路徑
 const authFile = "auth/user.json";
 
-// 為測試結果創建時間戳記目錄
-const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, "-");
+// 為測試結果創建時間戳記目錄 (台灣時間)
+const timestamp = new Date().toLocaleString('zh-TW', {
+  timeZone: 'Asia/Taipei',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false
+}).replace(/[\/\s:]/g, '-');
 export default defineConfig({
   testDir: path.join(__dirname, "tests"),
   fullyParallel: true,
@@ -32,7 +41,9 @@ export default defineConfig({
     [
       "html",
       {
-        outputFolder: process.env.PLAYWRIGHT_HTML_REPORT || "reports/latest",
+        outputFolder:
+          process.env.PLAYWRIGHT_HTML_REPORT ||
+          `assets/html-report/${timestamp}`,
       },
     ],
   ],
@@ -66,7 +77,7 @@ export default defineConfig({
       dependencies: ["setup"],
       // 您可以指定這個專案要執行的測試檔案目錄
       testMatch: /member\/.*\.spec\.ts/,
-      outputDir: `assets/member-tests/${timestamp}`,
+      // outputDir: `assets/member-tests/${timestamp}`,
     },
 
     // 專案 3: 公開專案 - 用於不需要登入的測試
@@ -86,7 +97,7 @@ export default defineConfig({
       },
       // 您可以指定這個專案要執行的測試檔案目錄
       testMatch: /guest\/.*\.spec\.ts/,
-      outputDir: `assets/guest-tests/${timestamp}`,
+      // outputDir: `assets/guest-tests/${timestamp}`,
     },
 
     /* 您也可以為 Firefox, WebKit 等瀏覽器設定類似的專案 */
