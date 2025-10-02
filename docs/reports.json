@@ -1,5 +1,17 @@
 [
   {
+    "id": "2025-09-30-12-27-01",
+    "timestamp": "2025-09-30-12-27-01",
+    "date": "2025-09-30T04:27:34.237Z",
+    "stats": {
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0,
+      "total": 2
+    },
+    "hasFailed": true
+  },
+  {
     "id": "2025-09-30-11-24-12",
     "timestamp": "2025-09-30-11-24-12",
     "date": "2025-09-30T03:24:27.251Z",
@@ -8,18 +20,20 @@
       "failed": 0,
       "skipped": 0,
       "total": 1
-    }
+    },
+    "hasFailed": false
   },
   {
     "id": "2025-09-30-11-09-43",
     "timestamp": "2025-09-30-11-09-43",
     "date": "2025-09-30T03:10:15.188Z",
     "stats": {
-      "passed": 1,
+      "passed": 3,
       "failed": 1,
       "skipped": 0,
-      "total": 2
-    }
+      "total": 4
+    },
+    "hasFailed": true
   },
   {
     "id": "2025-09-30-11-05-00",
@@ -30,18 +44,20 @@
       "failed": 0,
       "skipped": 0,
       "total": 3
-    }
+    },
+    "hasFailed": true
   },
   {
     "id": "2025-09-30-11-04-21",
     "timestamp": "2025-09-30-11-04-21",
     "date": "2025-09-30T03:04:52.418Z",
     "stats": {
-      "passed": 2,
-      "failed": 0,
+      "passed": 3,
+      "failed": 1,
       "skipped": 0,
-      "total": 2
-    }
+      "total": 4
+    },
+    "hasFailed": true
   },
   {
     "id": "2025-09-29T15-38-42",
@@ -52,50 +68,55 @@
       "failed": 1,
       "skipped": 0,
       "total": 3
-    }
+    },
+    "hasFailed": true
   },
   {
     "id": "2025-09-29T15-38-08",
     "timestamp": "2025-09-29T15-38-08",
     "date": "2025-09-29T15:38:19.573Z",
     "stats": {
-      "passed": 1,
+      "passed": 2,
       "failed": 1,
       "skipped": 0,
-      "total": 2
-    }
+      "total": 3
+    },
+    "hasFailed": false
   },
   {
     "id": "2025-09-29T15-37-49",
     "timestamp": "2025-09-29T15-37-49",
     "date": "2025-09-29T15:37:59.606Z",
     "stats": {
-      "passed": 3,
-      "failed": 1,
+      "passed": 1,
+      "failed": 0,
       "skipped": 0,
-      "total": 4
-    }
+      "total": 1
+    },
+    "hasFailed": false
   },
   {
     "id": "2025-09-29T15-36-36",
     "timestamp": "2025-09-29T15-36-36",
     "date": "2025-09-29T15:36:47.692Z",
     "stats": {
-      "passed": 3,
-      "failed": 0,
+      "passed": 1,
+      "failed": 1,
       "skipped": 0,
-      "total": 3
-    }
+      "total": 2
+    },
+    "hasFailed": false
   },
   {
     "id": "2025-09-29T15-36-06",
     "timestamp": "2025-09-29T15-36-06",
     "date": "2025-09-29T15:36:25.424Z",
     "stats": {
-      "passed": 3,
-      "failed": 1,
+      "passed": 2,
+      "failed": 0,
       "skipped": 0,
-      "total": 4
-    }
+      "total": 2
+    },
+    "hasFailed": false
   }
 ]

@@ -28,6 +28,16 @@ async function copyDirectory(src, dest) {
   }
 }
 
+async function checkTestFailure(reportPath) {
+  try {
+    const dataPath = path.join(reportPath, 'data');
+    await fs.access(dataPath);
+    return true; // data 資料夾存在 = 有失敗測試
+  } catch {
+    return false; // data 資料夾不存在 = 沒有失敗測試
+  }
+}
+
 async function parseReportStats(reportPath) {
   try {
     const indexPath = path.join(reportPath, "index.html");
@@ -215,12 +225,14 @@ async function buildDocs() {
       try {
         const stats = await fs.stat(reportPath);
         const reportStats = await parseReportStats(reportPath);
+        const hasFailed = await checkTestFailure(reportPath);
 
         reports.push({
           id: dir.name,
           timestamp: dir.name,
           date: stats.mtime,
           stats: reportStats,
+          hasFailed: hasFailed,
         });
       } catch (error) {
         console.warn(`跳過無效的報告資料夾：${dir.name}`);
@@ -260,6 +272,7 @@ async function buildDocs() {
       timestamp: report.timestamp,
       date: report.date.toISOString(),
       stats: report.stats,
+      hasFailed: report.hasFailed,
     }));
 
     await fs.writeFile(
@@ -465,39 +478,6 @@ async function generateMainPage(reports) {
   await fs.writeFile(path.join(DOCS_DIR, "index.html"), html);
 }
 
-function generateStatsOverview(reports) {
-  const totalStats = reports.reduce(
-    (acc, report) => {
-      acc.passed += report.stats.passed;
-      acc.failed += report.stats.failed;
-      acc.skipped += report.stats.skipped;
-      acc.total += report.stats.total;
-      return acc;
-    },
-    { passed: 0, failed: 0, skipped: 0, total: 0 }
-  );
-
-  return `
-    <div class="stats-overview">
-        <div class="stat-card">
-            <div class="stat-number" style="color: #27ae60">${totalStats.passed}</div>
-            <div class="stat-label">通過測試</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number" style="color: #e74c3c">${totalStats.failed}</div>
-            <div class="stat-label">失敗測試</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number" style="color: #f39c12">${totalStats.skipped}</div>
-            <div class="stat-label">跳過測試</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number" style="color: #3498db">${reports.length}</div>
-            <div class="stat-label">測試報告</div>
-        </div>
-    </div>
-  `;
-}
 
 function generateReportsGrid(reports) {
   const reportsHtml = reports
@@ -515,14 +495,14 @@ function generateReportsGrid(reports) {
       return `
       <div class="report-card">
           <div class="report-header ${
-            report.stats.failed > 0 ? " failed" : ""
+            report.hasFailed ? " failed" : ""
           }">
               <div class="report-title ">測試報告</div>
               <div class="report-date">${formattedDate}</div>
           </div>
           <div class="report-actions">
               <a href="reports/${report.id}/index.html" class="btn${
-        report.stats.failed > 0 ? " failed" : ""
+        report.hasFailed ? " failed" : ""
       }" target="_blank">
                   檢視詳細報告 →
               </a>
